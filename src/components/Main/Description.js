@@ -5,12 +5,12 @@ function Description() {
   return (
     <section className={classes.description}>
       <Card>
-        <h1>Delicious food delivered to you!</h1>
-        <p>
+        <h1 className={classes.header}>Delicious food delivered to you!</h1>
+        <p className={classes.text}>
           Choose your favourite meal from our brad selection of available meals
           and enjoy a delicious lunch or dinner at home
         </p>
-        <p>
+        <p className={classes.text}>
           All out meals are cooked with high-qality ingredients, just-in-time
           and of course by experienced chefs
         </p>

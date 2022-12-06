@@ -15,6 +15,7 @@ function Header(props) {
       <div className={classes.image}>
         <img src={mealImg} />
       </div>
+      <div className={classes.background}></div>
     </Fragment>
   );
 }
