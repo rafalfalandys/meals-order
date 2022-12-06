@@ -7,3 +7,10 @@
 .meals ul {
   padding: 0;
 }
+
+@media (max-width: 650px) {
+  .meals {
+    min-width: 0;
+    width: 90%;
+  }
+}

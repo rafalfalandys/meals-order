@@ -9,7 +9,7 @@ function App() {
       <Header />
       <Description />
       <Meals />
-      {/* <Cart /> */}
+      <Cart />
     </div>
   );
 }
