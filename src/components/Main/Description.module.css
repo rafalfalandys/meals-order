@@ -1,0 +1,20 @@
+.description {
+  background-color: var(--primary-color-light);
+  margin: 18rem auto 2rem auto;
+  width: 40%;
+  min-width: 50rem;
+  /* padding: 3rem; */
+  border-radius: var(--border-radius);
+}
+
+h1 {
+  font-size: var(--font-size-large);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+p {
+  font-size: var(--font-size-normal);
+  text-align: center;
+  margin-top: 1.5rem;
+}
