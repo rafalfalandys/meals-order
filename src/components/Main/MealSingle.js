@@ -1,12 +1,14 @@
+import Price from "../UI/Price";
 import classes from "./MealSingle.module.css";
 
 function MealSingle(props) {
   return (
-    <div className={classes.meal}>
+    <li className={classes.meal}>
       <div className={classes.description}>
         <h2 className={classes.name}>Pizza</h2>
         <p className={classes.text}>Homemade american pizza</p>
-        <div className={classes.price}>$16.50</div>
+        {/* <div className={classes.price}>$16.50</div> */}
+        <Price>$16.50</Price>
       </div>
       <form>
         <div className={classes.amount}>
@@ -15,7 +17,7 @@ function MealSingle(props) {
         </div>
         <button>+ Add</button>
       </form>
-    </div>
+    </li>
   );
 }
 

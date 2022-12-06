@@ -1,6 +1,6 @@
 import classes from "./Meals.module.css";
 import Card from "../UI/Card";
-import MealSingle from "./MealSingle/MealSingle";
+import MealSingle from "./MealSingle";
 
 function Meals(props) {
   return (

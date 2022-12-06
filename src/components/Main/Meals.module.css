@@ -2,9 +2,8 @@
   width: 70%;
   min-width: 60rem;
   margin: auto;
-  background-color: var(--primary-color-light-very);
-  border-radius: var(--border-radius);
 }
 
 .meals ul {
+  padding: 0;
 }

@@ -1,4 +1,12 @@
 .cart {
+  width: 70%;
+  height: 20rem;
+  /* background-color: red; */
+  z-index: 11;
+  position: fixed;
+  top: 20rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .overlay {
@@ -12,6 +20,32 @@
   backdrop-filter: blur(3px);
 
   z-index: 10;
+}
+
+.bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: end;
+}
+
+.amount-label {
+  justify-self: start;
+  font-size: var(--font-size-large);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.price {
+  font-size: var(--font-size-large-very);
+  font-weight: 600;
+}
+
+.bottom .buttons {
+  grid-column: -2/-1;
+  margin-top: 1rem;
+  display: flex;
+  gap: 1.5rem;
 }
 
 .hidden {

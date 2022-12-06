@@ -1,0 +1,29 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-grey-dark);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.left {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.name {
+  grid-column: 1/-1;
+  font-size: var(--font-size-large);
+}
+
+.amount {
+  font-size: var(--font-size-large);
+}
+
+.right {
+  display: flex;
+  gap: 1.5rem;
+}

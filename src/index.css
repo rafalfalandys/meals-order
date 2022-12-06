@@ -3,6 +3,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
 html {
@@ -15,7 +16,7 @@ body {
   color: var(--color-base-black);
 
   /* VARIABLES */
-  --font-size-normal: 1.5rem;
+  --font-size-medium: 1.5rem;
   --font-size-large: 2rem;
   --font-size-large-very: 2.4rem;
 

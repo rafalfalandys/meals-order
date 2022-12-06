@@ -17,7 +17,7 @@
 }
 
 .text {
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-medium);
 }
 
 .price {
@@ -29,10 +29,6 @@
   font-weight: 600;
 }
 
-.meal ul {
-  padding: 0;
-}
-
 /* form */
 
 .meal form {
@@ -40,7 +36,7 @@
   grid-template-columns: 1fr;
   gap: 1rem;
   align-items: center;
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-medium);
 }
 
 .amount {
@@ -75,4 +71,11 @@
   font-size: var(--font-size-large);
   font-weight: 100;
   color: var(--color-base-white);
+  transition: all 300ms;
+}
+.meal button:hover {
+  transform: scale(1.1);
+}
+.meal button:active {
+  transform: scale(1);
 }

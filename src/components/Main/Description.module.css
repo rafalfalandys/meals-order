@@ -3,7 +3,7 @@
   margin: 18rem auto 2rem auto;
   width: 40%;
   min-width: 50rem;
-  /* padding: 3rem; */
+  padding: 3rem;
   border-radius: var(--border-radius);
 }
 
@@ -14,7 +14,11 @@
 }
 
 .text {
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-medium);
   text-align: center;
   margin-top: 1.5rem;
+}
+
+.description .card {
+  background-color: red;
 }
