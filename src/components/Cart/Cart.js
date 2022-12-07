@@ -8,18 +8,16 @@ import CartContext from "../../store/cart-context";
 function Cart(props) {
   const cartCtx = useContext(CartContext);
 
-  const closeCartHandler = () => {
-    cartCtx.hideCart();
+  const escHandler = (e) => {
+    if (e.key === "Escape" && cartCtx.isCartVisible) {
+      console.log(e);
+      closeCartHandler();
+    }
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        console.log(cartCtx.isCartVisible);
-        closeCartHandler();
-      }
-    });
-  }, []);
+    document.addEventListener("keydown", escHandler);
+  }, [cartCtx.isCartVisible]);
 
   const cartItems = cartCtx.items.map((meal) => {
     return (
@@ -32,6 +30,11 @@ function Cart(props) {
       />
     );
   });
+
+  const closeCartHandler = () => {
+    cartCtx.hideCart();
+    document.removeEventListener("keydown", escHandler);
+  };
 
   const calcTotalPrice = cartCtx.items
     .reduce((acc, meal) => acc + meal.price * meal.amount, 0)
