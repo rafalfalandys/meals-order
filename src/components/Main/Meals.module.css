@@ -1,6 +1,7 @@
 .meals {
   width: 70%;
-  min-width: 60rem;
+  min-width: 50rem;
+  max-width: 90rem;
   margin: auto;
 }
 
