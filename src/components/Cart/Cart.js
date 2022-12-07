@@ -15,6 +15,7 @@ function Cart(props) {
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
+        console.log(cartCtx.isCartVisible);
         closeCartHandler();
       }
     });
