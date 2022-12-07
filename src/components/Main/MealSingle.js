@@ -1,19 +1,34 @@
+import { useRef } from "react";
 import Price from "../UI/Price";
 import classes from "./MealSingle.module.css";
 
 function MealSingle(props) {
+  const amountInputRef = useRef();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const enteredAmount = amountInputRef.current.value;
+    console.log(enteredAmount);
+  };
+
   return (
     <li className={classes.meal}>
       <div className={classes.description}>
-        <h2 className={classes.name}>Pizza</h2>
-        <p className={classes.text}>Homemade american pizza</p>
-        {/* <div className={classes.price}>$16.50</div> */}
-        <Price>$16.50</Price>
+        <h2 className={classes.name}>{props.name}</h2>
+        <p className={classes.text}>{props.description}</p>
+        <Price>${props.price}</Price>
       </div>
-      <form>
+      <form onSubmit={submitHandler}>
         <div className={classes.amount}>
           <label>Amount</label>
-          <input type="number" min="1" max="5" step="1" value="1" />
+          <input
+            ref={amountInputRef}
+            type="number"
+            min="1"
+            max="5"
+            step="1"
+            defaultValue="1"
+          />
         </div>
         <button>+ Add</button>
       </form>

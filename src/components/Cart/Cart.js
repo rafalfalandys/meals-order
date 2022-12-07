@@ -1,16 +1,39 @@
-import { Fragment } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import classes from "./Cart.module.css";
 import Card from "../UI/Card";
 import CartSingleItem from "./CartSingleItem";
 import Button from "../UI/Button";
-
-const Overlay = <div className={`${classes.overlay} ${classes.hiddenP}`}></div>;
+import CartContext from "../../store/cart-context";
 
 function Cart(props) {
+  const cartCtx = useContext(CartContext);
+
+  const closeCartHandler = () => {
+    cartCtx.hideCart();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeCartHandler();
+      }
+    });
+  }, []);
+
   return (
     <Fragment>
-      {Overlay}
-      <div className={classes.cart}>
+      <div
+        className={`${classes.overlay} ${
+          cartCtx.isCartVisible ? "" : classes.hidden
+        }`}
+        onClick={closeCartHandler}
+      ></div>
+
+      <div
+        className={`${classes.cart} ${
+          cartCtx.isCartVisible ? "" : classes.hidden
+        }`}
+      >
         <Card>
           <ul>
             <CartSingleItem />
@@ -20,7 +43,7 @@ function Cart(props) {
             <div className={classes["amount-label"]}>Total Amount</div>
             <div className={classes.price}>$120.50</div>
             <div className={classes.buttons}>
-              <Button>Close</Button>
+              <Button onClick={closeCartHandler}>Close</Button>
               <Button color="var(--primary-color)">Order</Button>
             </div>
           </div>

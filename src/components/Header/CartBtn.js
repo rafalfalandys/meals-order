@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import CartContext from "../../store/cart-context";
 import classes from "./CartBtn.module.css";
 
 const CartIcon = (
@@ -10,9 +12,17 @@ const CartIcon = (
   </svg>
 );
 
-function CartBtn() {
+function CartBtn(props) {
+  const cartCtx = useContext(CartContext);
+
+  const clickHandler = () => {
+    cartCtx.showCart();
+  };
   return (
-    <button className={`${classes.button} ${classes.bump}`}>
+    <button
+      className={`${classes.button} ${classes.bump}`}
+      onClick={clickHandler}
+    >
       <div className={classes.icon}> {CartIcon}</div>
       <span className={classes.text}>Cart</span>
       <span className={classes.number}> 3</span>

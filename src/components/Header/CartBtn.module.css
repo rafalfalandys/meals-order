@@ -10,18 +10,19 @@
   background-color: var(--primary-color);
   border: none;
   color: var(--color-base-white);
+  transition: all 300ms;
 }
-
-.icon {
+.button:hover {
+  transform: scale(1.1);
+}
+.button:active {
+  transform: scale(1);
 }
 
 svg {
   width: 3rem;
   height: 3rem;
   fill: var(--color-base-white);
-}
-
-.text {
 }
 
 .number {
