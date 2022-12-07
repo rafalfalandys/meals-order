@@ -68,9 +68,9 @@ function Cart(props) {
             <div className={classes["amount-label"]}>{`${
               isCartEmpty ? "Your cart is empty" : "Total Price"
             }`}</div>
-            <div className={classes.price}>{`${
-              isCartEmpty ? "" : calcTotalPrice
-            }`}</div>
+            {!isCartEmpty && (
+              <div className={classes.price}>${calcTotalPrice}</div>
+            )}
             <div className={classes.buttons}>
               <Button onClick={closeCartHandler}>
                 <span>Close</span>

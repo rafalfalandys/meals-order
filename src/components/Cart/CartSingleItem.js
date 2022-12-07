@@ -28,8 +28,12 @@ function CartSingleItem(props) {
         <span className={classes.amount}>x{props.amount}</span>
       </div>
       <div className={classes.right}>
-        <Button onClick={removeItemHandler}>-</Button>
-        <Button onClick={addItemHandler}>+</Button>
+        <Button onClick={removeItemHandler}>
+          <span>-</span>
+        </Button>
+        <Button onClick={addItemHandler}>
+          <span>+</span>
+        </Button>
       </div>
     </li>
   );
