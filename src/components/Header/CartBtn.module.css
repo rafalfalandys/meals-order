@@ -38,6 +38,26 @@ svg {
   box-shadow: inset 0px 5px 5px rgba(0, 0, 0, 0.4);
 }
 
+@media (max-width: 650px) {
+  .button {
+    padding: 0.6rem 3rem;
+  }
+
+  .button:hover {
+    transform: scale(1);
+  }
+
+  svg {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .number {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+}
+
 .bump {
   animation: bump 300ms;
 }
@@ -49,7 +69,7 @@ svg {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
   100% {
     transform: scale(1);

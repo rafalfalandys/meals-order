@@ -79,3 +79,9 @@
 .meal button:active {
   transform: scale(1);
 }
+
+@media (max-width: 650px) {
+  .meal button:hover {
+    transform: scale(1);
+  }
+}

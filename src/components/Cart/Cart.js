@@ -36,6 +36,16 @@ function Cart(props) {
     .reduce((acc, meal) => acc + meal.price * meal.amount, 0)
     .toFixed(2);
 
+  const isCartEmpty = cartCtx.items.length === 0;
+
+  const orderBtn = isCartEmpty ? (
+    ""
+  ) : (
+    <Button color="var(--primary-color)">
+      <span>Order</span>
+    </Button>
+  );
+
   //////////////////// component /////////////////////
 
   return (
@@ -55,11 +65,17 @@ function Cart(props) {
         <Card>
           <ul>{cartItems}</ul>
           <div className={classes.bottom}>
-            <div className={classes["amount-label"]}>Total Price</div>
-            <div className={classes.price}>${calcTotalPrice}</div>
+            <div className={classes["amount-label"]}>{`${
+              isCartEmpty ? "Your cart is empty" : "Total Price"
+            }`}</div>
+            <div className={classes.price}>{`${
+              isCartEmpty ? "" : calcTotalPrice
+            }`}</div>
             <div className={classes.buttons}>
-              <Button onClick={closeCartHandler}>Close</Button>
-              <Button color="var(--primary-color)">Order</Button>
+              <Button onClick={closeCartHandler}>
+                <span>Close</span>
+              </Button>
+              {orderBtn}
             </div>
           </div>
         </Card>

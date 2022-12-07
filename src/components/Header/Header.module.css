@@ -17,6 +17,12 @@
   z-index: 2;
 }
 
+@media (max-width: 650px) {
+  .header {
+    padding: 0 5%;
+  }
+}
+
 .header-background {
   background: var(--color-base-white);
   opacity: 0.7;

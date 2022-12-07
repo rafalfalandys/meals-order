@@ -7,10 +7,20 @@
   transition: all 0.3s;
 }
 
+.button span {
+  color: var(--color-base-black);
+}
+
 .button:hover {
   transform: scale(1.1);
 }
 
 .button:active {
   transform: scale(1);
+}
+
+@media (max-width: 650px) {
+  .button:hover {
+    transform: scale(1);
+  }
 }
