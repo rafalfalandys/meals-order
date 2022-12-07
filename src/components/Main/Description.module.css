@@ -1,8 +1,9 @@
 .description {
   background-color: var(--primary-color-light);
   margin: 18rem auto 2rem auto;
-  width: 40%;
+  width: 35%;
   min-width: 50rem;
+  max-width: 70rem;
   padding: 3rem;
   border-radius: var(--border-radius);
 }
