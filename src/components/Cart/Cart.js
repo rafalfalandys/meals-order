@@ -20,6 +20,24 @@ function Cart(props) {
     });
   }, []);
 
+  const cartItems = cartCtx.items.map((meal) => {
+    return (
+      <CartSingleItem
+        name={meal.name}
+        price={meal.price.toFixed(2)}
+        amount={meal.amount}
+        id={meal.id}
+        key={meal.id}
+      />
+    );
+  });
+
+  const calcTotalPrice = cartCtx.items
+    .reduce((acc, meal) => acc + meal.price * meal.amount, 0)
+    .toFixed(2);
+
+  //////////////////// component /////////////////////
+
   return (
     <Fragment>
       <div
@@ -35,13 +53,10 @@ function Cart(props) {
         }`}
       >
         <Card>
-          <ul>
-            <CartSingleItem />
-            <CartSingleItem />
-          </ul>
+          <ul>{cartItems}</ul>
           <div className={classes.bottom}>
-            <div className={classes["amount-label"]}>Total Amount</div>
-            <div className={classes.price}>$120.50</div>
+            <div className={classes["amount-label"]}>Total Price</div>
+            <div className={classes.price}>${calcTotalPrice}</div>
             <div className={classes.buttons}>
               <Button onClick={closeCartHandler}>Close</Button>
               <Button color="var(--primary-color)">Order</Button>

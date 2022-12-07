@@ -37,6 +37,7 @@ function Meals(props) {
       name={meal.name}
       description={meal.description}
       price={meal.price.toFixed(2)}
+      id={meal.id}
       key={meal.id}
     />
   ));

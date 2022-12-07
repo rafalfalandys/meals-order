@@ -1,14 +1,21 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import CartContext from "../../store/cart-context";
 import Price from "../UI/Price";
 import classes from "./MealSingle.module.css";
 
 function MealSingle(props) {
+  const cartCtx = useContext(CartContext);
   const amountInputRef = useRef();
 
   const submitHandler = (e) => {
     e.preventDefault();
     const enteredAmount = amountInputRef.current.value;
-    console.log(enteredAmount);
+    cartCtx.addItem({
+      name: props.name,
+      amount: +enteredAmount,
+      price: +props.price,
+      id: props.id,
+    });
   };
 
   return (
