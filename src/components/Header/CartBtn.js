@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import CartContext from "../../store/cart-context";
 import classes from "./CartBtn.module.css";
 
@@ -15,17 +15,28 @@ const CartIcon = (
 function CartBtn(props) {
   const cartCtx = useContext(CartContext);
 
+  const [bump, setBump] = useState(false);
+
+  useEffect(() => {
+    setBump(true);
+    const timer = setTimeout(() => {
+      setBump(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [cartCtx.items]);
+
   const clickHandler = () => {
     cartCtx.showCart();
   };
   return (
     <button
-      className={`${classes.button} ${classes.bump}`}
+      className={`${classes.button} ${bump ? classes.bump : ""}`}
       onClick={clickHandler}
     >
       <div className={classes.icon}> {CartIcon}</div>
       <span className={classes.text}>Cart</span>
-      <span className={classes.number}> 3</span>
+      <span className={classes.number}>{cartCtx.totalAmount}</span>
     </button>
   );
 }
