@@ -12,6 +12,8 @@ function CartSummary(props) {
     .reduce((acc, meal) => acc + meal.price * meal.amount, 0)
     .toFixed(2);
 
+  const showFormHandler = () => cartCtx.toggleForm();
+
   const cartItems = cartCtx.items.map((meal) => {
     return (
       <CartSingleItem
@@ -29,7 +31,7 @@ function CartSummary(props) {
   const orderBtn = isCartEmpty ? (
     ""
   ) : (
-    <Button color="var(--primary-color-light)">
+    <Button color="var(--primary-color-light)" onClick={showFormHandler}>
       <span>Confirm</span>
     </Button>
   );

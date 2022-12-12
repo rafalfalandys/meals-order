@@ -5,3 +5,9 @@
   padding: 3rem 5rem;
   position: relative;
 }
+
+@media (max-width: 650px) {
+  .card {
+    padding: 3rem 3rem;
+  }
+}

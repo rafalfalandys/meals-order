@@ -81,7 +81,7 @@ function CartProvider(props) {
 
   const cartContext = {
     isCartVisible: isCartVisible,
-    isOrderFormVisible: false,
+    isFormVisible: isFormVisible,
 
     items: cartState.items,
     totalAmount: cartState.totalAmount,
@@ -94,6 +94,7 @@ function CartProvider(props) {
 
     showForm: () => setIsFormVisible(true),
     hideForm: () => setIsFormVisible(false),
+    toggleForm: () => setIsFormVisible((prevState) => !prevState),
   };
 
   return (

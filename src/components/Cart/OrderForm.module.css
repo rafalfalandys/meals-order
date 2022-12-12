@@ -3,7 +3,10 @@
   transform: translateY(-5rem);
   z-index: -1;
   position: relative;
-  transition: all 300;
+}
+
+.order {
+  transition: all 0.3s;
 }
 
 .moved {
