@@ -2,7 +2,7 @@ import { useContext } from "react";
 import CartContext from "../../store/cart-context";
 import Button from "../UI/Button";
 import Price from "../UI/Price";
-import classes from "./CartSingleItem.module.css";
+import classes from "./SingleItem.module.css";
 
 function CartSingleItem(props) {
   const cartCtx = useContext(CartContext);

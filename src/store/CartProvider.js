@@ -63,7 +63,7 @@ const cartReducer = (state, action) => {
 
 function CartProvider(props) {
   const [isCartVisible, setIsCartVisible] = useState(false);
-
+  const [isFormVisible, setIsFormVisible] = useState(false);
   const [cartState, setCartState] = useReducer(cartReducer, defaultCartState);
 
   const addItem = (item) => {
@@ -81,16 +81,19 @@ function CartProvider(props) {
 
   const cartContext = {
     isCartVisible: isCartVisible,
+    isOrderFormVisible: false,
 
     items: cartState.items,
     totalAmount: cartState.totalAmount,
 
     addItem: addItem,
     removeItem: removeItem,
-    showCart: () => {
-      setIsCartVisible(true);
-    },
+
+    showCart: () => setIsCartVisible(true),
     hideCart: () => setIsCartVisible(false),
+
+    showForm: () => setIsFormVisible(true),
+    hideForm: () => setIsFormVisible(false),
   };
 
   return (

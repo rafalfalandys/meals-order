@@ -32,33 +32,6 @@
   transition: all 300ms;
 }
 
-.bottom {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  justify-items: end;
-}
-
-.amount-label {
-  justify-self: start;
-  font-size: var(--font-size-large);
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.price {
-  font-size: var(--font-size-large-very);
-  font-weight: 600;
-}
-
-.bottom .buttons {
-  grid-column: 1/-1;
-  margin-top: 1rem;
-  display: flex;
-  gap: 1.5rem;
-  color: black;
-}
-
 .hidden {
   visibility: hidden;
   opacity: 0;
