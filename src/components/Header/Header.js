@@ -13,7 +13,7 @@ function Header(props) {
         <Button />
       </div>
       <div className={classes.image}>
-        <img src={mealImg} />
+        <img src={mealImg} alt="meal" />
       </div>
       <div className={classes.background}></div>
     </Fragment>

@@ -1,5 +1,4 @@
 import classes from "./Description.module.css";
-import Card from "../UI/Card";
 
 function Description() {
   return (

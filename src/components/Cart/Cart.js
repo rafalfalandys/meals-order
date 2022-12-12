@@ -1,23 +1,13 @@
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useCallback, useContext, useEffect } from "react";
 import classes from "./Cart.module.css";
 import Card from "../UI/Card";
 import CartSingleItem from "./CartSingleItem";
 import Button from "../UI/Button";
 import CartContext from "../../store/cart-context";
+import CartOrderForm from "./CartOrderForm";
 
 function Cart(props) {
   const cartCtx = useContext(CartContext);
-
-  const escHandler = (e) => {
-    if (e.key === "Escape" && cartCtx.isCartVisible) {
-      console.log(e);
-      closeCartHandler();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keydown", escHandler);
-  }, [cartCtx.isCartVisible]);
 
   const cartItems = cartCtx.items.map((meal) => {
     return (
@@ -31,10 +21,18 @@ function Cart(props) {
     );
   });
 
-  const closeCartHandler = () => {
-    cartCtx.hideCart();
-    document.removeEventListener("keydown", escHandler);
-  };
+  const closeCartHandler = useCallback(() => cartCtx.hideCart(), [cartCtx]);
+
+  useEffect(() => {
+    const escHandler = (e) => {
+      if (e.key === "Escape" && cartCtx.isCartVisible) {
+        console.log(e);
+        closeCartHandler();
+        document.removeEventListener("keydown", escHandler);
+      }
+    };
+    document.addEventListener("keydown", escHandler);
+  }, [cartCtx.isCartVisible, closeCartHandler]);
 
   const calcTotalPrice = cartCtx.items
     .reduce((acc, meal) => acc + meal.price * meal.amount, 0)
@@ -82,6 +80,9 @@ function Cart(props) {
               {orderBtn}
             </div>
           </div>
+        </Card>
+        <Card style={{ transform: "translateY(2rem)" }}>
+          <CartOrderForm />
         </Card>
       </div>
     </Fragment>

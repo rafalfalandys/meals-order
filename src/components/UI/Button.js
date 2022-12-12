@@ -4,7 +4,7 @@ function Button(props) {
   return (
     <button
       className={classes.button}
-      style={{ backgroundColor: `${props.color}` }}
+      // style={{ backgroundColor: `${props.color}` }}
       onClick={props.onClick}
     >
       {props.children}
