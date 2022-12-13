@@ -31,8 +31,12 @@ function CartSummary(props) {
   const orderBtn = isCartEmpty ? (
     ""
   ) : (
-    <Button color="var(--primary-color-light)" onClick={showFormHandler}>
-      <span>Confirm</span>
+    <Button
+      onClick={showFormHandler}
+      style={{ width: "16rem", backgroundColor: "var(--primary-color-light)" }}
+    >
+      {cartCtx.isFormVisible || <span>Confirm</span>}
+      {cartCtx.isFormVisible && <span>Hide Form</span>}
     </Button>
   );
 

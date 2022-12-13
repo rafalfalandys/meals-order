@@ -5,7 +5,7 @@ function useInput(validationCheck) {
   const [isTouched, setIsTouched] = useState(false);
 
   const isValueValid = validationCheck(value);
-  const isAllValid = isValueValid && !isTouched;
+  const isAllValid = isValueValid || !isTouched;
 
   const onChangeHandler = (e) => setValue(e.target.value);
   const onBlurHandler = (e) => setIsTouched(true);

@@ -22,7 +22,6 @@
   justify-content: space-between;
   align-items: center;
 
-  margin-bottom: 1rem;
   background-color: var(--primary-color);
   color: var(--color-base-white);
   border-radius: 10rem;
@@ -51,4 +50,17 @@ input::-webkit-inner-spin-button {
   justify-content: center;
   margin-top: 4rem;
   height: 5rem;
+}
+
+.error-msg {
+  padding-left: calc(20% + 4rem);
+  font-size: var(--font-size-medium);
+  color: red;
+  margin-bottom: 1rem;
+  height: 2rem;
+}
+
+.error {
+  background-color: rgb(255, 155, 155);
+  border: 1.5px solid red;
 }
