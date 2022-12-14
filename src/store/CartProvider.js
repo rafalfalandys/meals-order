@@ -4,11 +4,13 @@ import CartContext from "./cart-context";
 const defaultCartState = {
   items: [],
   totalAmount: 0,
+  totalPrice: 0,
 };
 
 const cartReducer = (state, action) => {
   if (action.type === "ADD") {
     const updatedTotalAmount = state.totalAmount + action.item.amount;
+    const updatedTotalPrice = (state.totalPrice + action.item.price).toFixed(2);
 
     if (state.items.some((item) => item.id === action.item.id)) {
       const itemIndex = state.items.findIndex(
@@ -22,19 +24,25 @@ const cartReducer = (state, action) => {
       const updatedItems = [...state.items];
       updatedItems[itemIndex] = updatedItem;
 
-      return { items: updatedItems, totalAmount: updatedTotalAmount };
+      return {
+        items: updatedItems,
+        totalAmount: updatedTotalAmount,
+        totalPrice: +updatedTotalPrice,
+      };
     }
 
     if (!state.items.some((item) => item.id === action.item.id)) {
       return {
         items: [...state.items, action.item],
         totalAmount: updatedTotalAmount,
+        totalPrice: +updatedTotalPrice,
       };
     }
   }
 
   if (action.type === "REMOVE") {
     const updatedTotalAmount = state.totalAmount - 1;
+    const updatedTotalPrice = (state.totalPrice - action.price).toFixed(2);
     const itemIndex = state.items.findIndex((item) => item.id === action.id);
     const updatedItems = [...state.items];
 
@@ -43,6 +51,7 @@ const cartReducer = (state, action) => {
       return {
         items: updatedItems,
         totalAmount: updatedTotalAmount,
+        totalPrice: +updatedTotalPrice,
       };
     }
     if (state.items[itemIndex].amount > 1) {
@@ -52,6 +61,7 @@ const cartReducer = (state, action) => {
       return {
         items: updatedItems,
         totalAmount: updatedTotalAmount,
+        totalPrice: +updatedTotalPrice,
       };
     }
   }
@@ -77,7 +87,11 @@ function CartProvider(props) {
       },
     });
   };
-  const removeItem = (id) => setCartState({ type: "REMOVE", id: id });
+
+  const removeItem = (item) =>
+    setCartState({ type: "REMOVE", id: item.id, price: item.price });
+
+  const resetCart = () => setCartState({});
 
   const cartContext = {
     isCartVisible: isCartVisible,
@@ -85,9 +99,11 @@ function CartProvider(props) {
 
     items: cartState.items,
     totalAmount: cartState.totalAmount,
+    totalPrice: cartState.totalPrice,
 
     addItem: addItem,
     removeItem: removeItem,
+    resetCart: resetCart,
 
     showCart: () => setIsCartVisible(true),
     hideCart: () => setIsCartVisible(false),

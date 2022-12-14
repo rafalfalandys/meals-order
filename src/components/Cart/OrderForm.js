@@ -2,11 +2,16 @@ import Card from "../UI/Card";
 import classes from "./OrderForm.module.css";
 import Button from "../UI/Button";
 import CartContext from "../../store/cart-context";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import useInput from "../../hooks/use-input";
+import Spinner from "../UI/Spinner";
 
 function CartOrderForm() {
   const cartCtx = useContext(CartContext);
+  const [isLoading, setIsloading] = useState(false);
+  const [isLoad, setIsLoad] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const {
     value: name,
@@ -14,6 +19,7 @@ function CartOrderForm() {
     isAllValid: isNameValid,
     onChangeHandler: onNameChangeHandler,
     onBlurHandler: onNameBlurHandler,
+    reset: resetName,
   } = useInput((value) => value.trim() !== "");
 
   const {
@@ -22,6 +28,7 @@ function CartOrderForm() {
     isAllValid: isAddressValid,
     onChangeHandler: onAddressChangeHandler,
     onBlurHandler: onAddressBlurHandler,
+    reset: resetAddress,
   } = useInput((value) => value.trim() !== "");
 
   const {
@@ -30,12 +37,115 @@ function CartOrderForm() {
     isAllValid: isPhoneValid,
     onChangeHandler: onPhoneChangeHandler,
     onBlurHandler: onPhoneBlurHandler,
+    reset: resetPhone,
   } = useInput((value) => value.trim() !== "");
 
-  const submitHandler = (e) => {
+  useEffect(() => {
+    setIsFormValid(
+      isNameValueValid && isAddressValueValid && isPhoneValueValid
+    );
+  }, [isNameValueValid, isAddressValueValid, isPhoneValueValid]);
+
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(e);
+    if (!isFormValid) return;
+    const orderData = {
+      name,
+      address,
+      phone,
+      order: cartCtx.items.map((item) => `${item.name} x${item.amount}`),
+      totalPrice: cartCtx.totalPrice,
+    };
+    console.log(orderData);
+
+    setIsloading(true);
+    await fetch(
+      "https://react-meals-e5a99-default-rtdb.europe-west1.firebasedatabase.app/orders.json",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
+      }
+    );
+    resetName();
+    resetAddress();
+    resetPhone();
+    setIsloading(false);
+    setIsLoad(true);
   };
+
+  const resetHandler = () => {
+    setIsLoad(false);
+    cartCtx.hideForm();
+    cartCtx.resetCart();
+    cartCtx.hideCart();
+  };
+
+  const formEl = (
+    <form onSubmit={submitHandler}>
+      <div className={classes.row}>
+        <label>Name</label>
+        <input
+          className={`${isNameValid ? "" : classes.error}`}
+          type="text"
+          value={name}
+          onChange={onNameChangeHandler}
+          onBlur={onNameBlurHandler}
+        />
+      </div>
+      <p className={classes["error-msg"]}>
+        {isNameValid || <span>Enter correct name</span>}
+      </p>
+      <div className={classes.row}>
+        <label>Address</label>
+        <input
+          className={`${isAddressValid ? "" : classes.error}`}
+          type="text"
+          value={address}
+          onChange={onAddressChangeHandler}
+          onBlur={onAddressBlurHandler}
+        />
+      </div>
+
+      <p className={classes["error-msg"]}>
+        {isAddressValid || <span>Enter correct address</span>}
+      </p>
+      <div className={classes.row}>
+        <label>Phone</label>
+        <input
+          className={`${isPhoneValid ? "" : classes.error}`}
+          type="number"
+          value={phone}
+          onChange={onPhoneChangeHandler}
+          onBlur={onPhoneBlurHandler}
+        />
+      </div>
+      <p className={classes["error-msg"]}>
+        {isPhoneValid || <span>Enter correct phone</span>}
+      </p>
+      <div className={classes.buttons}>
+        {isFormValid && (
+          <Button style={{ backgroundColor: "var(--primary-color-light)" }}>
+            <span>Order</span>{" "}
+          </Button>
+        )}
+      </div>
+    </form>
+  );
+
+  useEffect(() => {
+    setMessage("Recipe succesfully uploaded");
+    setTimeout(() => {
+      setMessage("Come back for more some time!");
+    }, 1400);
+  }, [isLoad]);
+
+  const messageEl = (
+    <div className={classes.message}>
+      <h1>{message}</h1>
+      <Button onClick={resetHandler}>New Order</Button>
+    </div>
+  );
 
   const orderClasses = `${classes.order} 
   ${cartCtx.isFormVisible || classes.moved}`;
@@ -43,54 +153,10 @@ function CartOrderForm() {
   return (
     <div className={classes.hideout}>
       <div className={orderClasses}>
-        <Card>
-          <form onSubmit={submitHandler}>
-            <div className={classes.row}>
-              <label>Name</label>
-              <input
-                className={`${isNameValid ? "" : classes.error}`}
-                type="text"
-                value={name}
-                onChange={onNameChangeHandler}
-                onBlur={onNameBlurHandler}
-              />
-            </div>
-            <p className={classes["error-msg"]}>
-              {isNameValid || <span>Enter correct name</span>}
-            </p>
-            <div className={classes.row}>
-              <label>Address</label>
-              <input
-                className={`${isAddressValid ? "" : classes.error}`}
-                type="text"
-                value={address}
-                onChange={onAddressChangeHandler}
-                onBlur={onAddressBlurHandler}
-              />
-            </div>
-
-            <p className={classes["error-msg"]}>
-              {isAddressValid || <span>Enter correct address</span>}
-            </p>
-            <div className={classes.row}>
-              <label>Phone</label>
-              <input
-                className={`${isPhoneValid ? "" : classes.error}`}
-                type="number"
-                value={phone}
-                onChange={onPhoneChangeHandler}
-                onBlur={onPhoneBlurHandler}
-              />
-            </div>
-            <p className={classes["error-msg"]}>
-              {isPhoneValid || <span>Enter correct phone</span>}
-            </p>
-            <div className={classes.buttons}>
-              <Button style={{ backgroundColor: "var(--primary-color-light)" }}>
-                <span>Order</span>{" "}
-              </Button>
-            </div>
-          </form>
+        <Card style={{ height: "40rem" }}>
+          {!isLoading && !isLoad && formEl}
+          {isLoading && !isLoad && <Spinner />}
+          {!isLoading && isLoad && messageEl}
         </Card>
       </div>
     </div>

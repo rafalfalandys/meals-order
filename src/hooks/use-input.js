@@ -10,7 +10,19 @@ function useInput(validationCheck) {
   const onChangeHandler = (e) => setValue(e.target.value);
   const onBlurHandler = (e) => setIsTouched(true);
 
-  return { value, isValueValid, isAllValid, onChangeHandler, onBlurHandler };
+  const reset = () => {
+    setValue("");
+    setIsTouched(false);
+  };
+
+  return {
+    value,
+    isValueValid,
+    isAllValid,
+    onChangeHandler,
+    onBlurHandler,
+    reset,
+  };
 }
 
 export default useInput;

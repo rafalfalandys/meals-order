@@ -6,9 +6,11 @@ const defaultCartState = {
 
   items: [],
   totalAmount: 0,
+  totalPrice: 0,
 
   addItem: () => {},
   removeItem: () => {},
+  calcTotalPrice: () => {},
 
   showCart: () => {},
   hideCart: () => {},

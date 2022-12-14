@@ -11,13 +11,16 @@ function CartSingleItem(props) {
     cartCtx.addItem({
       name: props.name,
       amount: 1,
-      price: props.price,
+      price: +props.price,
       id: props.id,
     });
   };
 
   const removeItemHandler = () => {
-    cartCtx.removeItem(props.id);
+    cartCtx.removeItem({
+      id: props.id,
+      price: +props.price,
+    });
   };
 
   return (

@@ -8,9 +8,9 @@ import Button from "../UI/Button";
 function CartSummary(props) {
   const cartCtx = useContext(CartContext);
 
-  const calcTotalPrice = cartCtx.items
-    .reduce((acc, meal) => acc + meal.price * meal.amount, 0)
-    .toFixed(2);
+  // const calcTotalPrice = cartCtx.items
+  //   .reduce((acc, meal) => acc + meal.price * meal.amount, 0)
+  //   .toFixed(2);
 
   const showFormHandler = () => cartCtx.toggleForm();
 
@@ -47,7 +47,7 @@ function CartSummary(props) {
   );
 
   const price = !isCartEmpty && (
-    <div className={classes.price}>${calcTotalPrice}</div>
+    <div className={classes.price}>${cartCtx.totalPrice}</div>
   );
 
   return (
