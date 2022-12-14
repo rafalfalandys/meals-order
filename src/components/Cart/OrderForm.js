@@ -124,11 +124,9 @@ function CartOrderForm() {
         {isPhoneValid || <span>Enter correct phone</span>}
       </p>
       <div className={classes.buttons}>
-        {isFormValid && (
-          <Button style={{ backgroundColor: "var(--primary-color-light)" }}>
-            <span>Order</span>{" "}
-          </Button>
-        )}
+        <Button style={{ backgroundColor: "var(--primary-color-light)" }}>
+          <span>Order</span>{" "}
+        </Button>
       </div>
     </form>
   );
