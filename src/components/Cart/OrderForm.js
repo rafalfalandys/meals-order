@@ -12,6 +12,7 @@ function CartOrderForm() {
   const [isLoad, setIsLoad] = useState(false);
   const [message, setMessage] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const {
     value: name,
@@ -57,6 +58,7 @@ function CartOrderForm() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setErrorMsg("");
     if (!isFormValid) return;
     const orderData = {
       name,
@@ -66,7 +68,7 @@ function CartOrderForm() {
       totalPrice: cartCtx.totalPrice,
     };
 
-    uploadOrder(orderData);
+    uploadOrder(orderData).catch((error) => setErrorMsg(error));
   };
 
   const resetHandler = () => {
@@ -145,13 +147,26 @@ function CartOrderForm() {
   const orderClasses = `${classes.order} 
   ${cartCtx.isFormVisible || classes.moved}`;
 
+  const errorEl = (
+    <div className={classes["error-el"]}>
+      <p className={classes.errorMsg}>Something went wrong</p>
+      <Button
+        style={{ backgroundColor: "var(--primary-color-light)" }}
+        onClick={submitHandler}
+      >
+        Try again
+      </Button>
+    </div>
+  );
+
   return (
     <div className={classes.hideout}>
       <div className={orderClasses}>
-        <Card>
+        <Card style={{ height: "40rem" }}>
           {!isLoading && !isLoad && formEl}
-          {isLoading && !isLoad && <Spinner />}
+          {isLoading && !isLoad && !errorMsg && <Spinner />}
           {!isLoading && isLoad && messageEl}
+          {errorMsg && errorEl}
         </Card>
       </div>
     </div>

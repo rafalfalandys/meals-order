@@ -9,6 +9,7 @@ import useAjax from "../../hooks/use-ajax";
 
 function Meals() {
   const [meals, setMeals] = useState([]);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const action = (data) => {
     const mealsArr = [];
@@ -19,7 +20,11 @@ function Meals() {
   const { fetchMeals, isLoading } = useAjax(action);
 
   useEffect(() => {
-    fetchMeals();
+    setErrorMsg("");
+    fetchMeals().catch((error) => {
+      console.log(error.message);
+      setErrorMsg(error.message);
+    });
   }, []);
 
   const mealsList = meals.map((meal) => (
@@ -38,6 +43,7 @@ function Meals() {
         <ul>
           {mealsList}
           {isLoading && <Spinner />}
+          {errorMsg && <p className={classes.error}>{errorMsg}</p>}
         </ul>
       </Card>
     </section>

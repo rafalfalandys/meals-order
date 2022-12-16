@@ -77,6 +77,19 @@ input::-webkit-inner-spin-button {
   border: 1.5px solid red;
 }
 
+.error-el {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.errorMsg {
+  text-align: center;
+  color: red;
+  font-size: var(--font-size-medium);
+  margin: 7rem auto;
+}
+
 .message {
   display: flex;
   flex-direction: column;

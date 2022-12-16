@@ -16,3 +16,9 @@
     width: 90%;
   }
 }
+
+.error {
+  text-align: center;
+  font-size: var(--font-size-medium);
+  color: red;
+}

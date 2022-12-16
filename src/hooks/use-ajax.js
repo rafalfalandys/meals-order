@@ -8,6 +8,8 @@ function useAjax(action, isUpload = false) {
   }.json`;
 
   const fetchMeals = async (uploadData) => {
+    setIsLoading(true);
+
     const fetchPro = uploadData
       ? fetch(url, {
           method: "POST",
@@ -16,8 +18,12 @@ function useAjax(action, isUpload = false) {
         })
       : fetch(url);
 
-    setIsLoading(true);
     const response = await fetchPro;
+    if (!response.ok) {
+      setIsLoading(false);
+      console.log(response);
+      throw new Error(`Something went wrong (${response.status})`);
+    }
     const data = await response.json();
 
     action(data);
