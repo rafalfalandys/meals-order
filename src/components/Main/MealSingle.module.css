@@ -56,9 +56,6 @@
   }
 }
 
-.meal label {
-}
-
 .meal input {
   background-color: var(--primary-color-light-very);
   border: none;

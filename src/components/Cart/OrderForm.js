@@ -5,10 +5,11 @@ import CartContext from "../../store/cart-context";
 import { useContext, useEffect, useState } from "react";
 import useInput from "../../hooks/use-input";
 import Spinner from "../UI/Spinner";
+import useAjax from "../../hooks/use-ajax";
+import { act } from "react-dom/test-utils";
 
 function CartOrderForm() {
   const cartCtx = useContext(CartContext);
-  const [isLoading, setIsloading] = useState(false);
   const [isLoad, setIsLoad] = useState(false);
   const [message, setMessage] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
@@ -40,6 +41,15 @@ function CartOrderForm() {
     reset: resetPhone,
   } = useInput((value) => value.trim() !== "");
 
+  const action = () => {
+    resetName();
+    resetAddress();
+    resetPhone();
+    setIsLoad(true);
+  };
+
+  const { fetchMeals: uploadOrder, isLoading } = useAjax(action, true);
+
   useEffect(() => {
     setIsFormValid(
       isNameValueValid && isAddressValueValid && isPhoneValueValid
@@ -56,22 +66,8 @@ function CartOrderForm() {
       order: cartCtx.items.map((item) => `${item.name} x${item.amount}`),
       totalPrice: cartCtx.totalPrice,
     };
-    console.log(orderData);
 
-    setIsloading(true);
-    await fetch(
-      "https://react-meals-e5a99-default-rtdb.europe-west1.firebasedatabase.app/orders.json",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData),
-      }
-    );
-    resetName();
-    resetAddress();
-    resetPhone();
-    setIsloading(false);
-    setIsLoad(true);
+    uploadOrder(orderData);
   };
 
   const resetHandler = () => {

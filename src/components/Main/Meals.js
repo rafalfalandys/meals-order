@@ -3,24 +3,20 @@ import Card from "../UI/Card";
 import MealSingle from "./MealSingle";
 import { useEffect, useState } from "react";
 import Spinner from "../UI/Spinner";
+import useAjax from "../../hooks/use-ajax";
 
 ///////////////// COMPONENT /////////////////
 
-function Meals(props) {
+function Meals() {
   const [meals, setMeals] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const fetchMeals = async () => {
-    setIsLoading(true);
-    const response = await fetch(
-      "https://react-meals-e5a99-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
-    );
-    const data = await response.json();
+  const action = (data) => {
     const mealsArr = [];
     for (const key in data) mealsArr.push(data[key]);
     setMeals(mealsArr);
-    setIsLoading(false);
   };
+
+  const { fetchMeals, isLoading } = useAjax(action);
 
   useEffect(() => {
     fetchMeals();
