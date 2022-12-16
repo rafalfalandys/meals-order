@@ -6,7 +6,6 @@ import { useContext, useEffect, useState } from "react";
 import useInput from "../../hooks/use-input";
 import Spinner from "../UI/Spinner";
 import useAjax from "../../hooks/use-ajax";
-import { act } from "react-dom/test-utils";
 
 function CartOrderForm() {
   const cartCtx = useContext(CartContext);
