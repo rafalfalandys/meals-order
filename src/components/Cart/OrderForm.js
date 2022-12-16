@@ -124,7 +124,7 @@ function CartOrderForm() {
         {isPhoneValid || <span>Enter correct phone</span>}
       </p>
       <div className={classes.buttons}>
-        <Button style={{ backgroundColor: "var(--primary-color-light)" }}>
+        <Button disabled={!isFormValid}>
           <span>Order</span>{" "}
         </Button>
       </div>
@@ -141,7 +141,9 @@ function CartOrderForm() {
   const messageEl = (
     <div className={classes.message}>
       <h1>{message}</h1>
-      <Button onClick={resetHandler}>New Order</Button>
+      <Button onClick={resetHandler}>
+        <span>New Order</span>{" "}
+      </Button>
     </div>
   );
 
@@ -151,7 +153,7 @@ function CartOrderForm() {
   return (
     <div className={classes.hideout}>
       <div className={orderClasses}>
-        <Card style={{ height: "40rem" }}>
+        <Card>
           {!isLoading && !isLoad && formEl}
           {isLoading && !isLoad && <Spinner />}
           {!isLoading && isLoad && messageEl}
@@ -162,3 +164,5 @@ function CartOrderForm() {
 }
 
 export default CartOrderForm;
+
+// style={{ height: "35rem" }}

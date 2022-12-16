@@ -52,7 +52,7 @@ function CartSummary(props) {
 
   return (
     <Card style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.2)" }}>
-      <ul>{cartItems}</ul>
+      <ul className={classes.meals}>{cartItems}</ul>
       <div className={classes.bottom}>
         {label}
         {price}

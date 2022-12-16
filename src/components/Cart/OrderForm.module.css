@@ -1,6 +1,6 @@
 .hideout {
   overflow: hidden;
-  transform: translateY(-5rem);
+  top: -5rem;
   z-index: -1;
   position: relative;
 }
@@ -28,6 +28,12 @@
 
   padding-left: 2rem;
   font-size: var(--font-size-medium);
+}
+
+@media (max-width: 650px) {
+  .row {
+    margin-bottom: 1rem;
+  }
 }
 
 input {
@@ -58,6 +64,12 @@ input::-webkit-inner-spin-button {
   color: red;
   margin-bottom: 1rem;
   height: 2rem;
+}
+
+@media (max-width: 650px) {
+  .error-msg {
+    display: none;
+  }
 }
 
 .error {

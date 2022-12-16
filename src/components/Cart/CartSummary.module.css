@@ -1,3 +1,11 @@
+@media (max-width: 650px) {
+  .meals {
+    min-height: 15rem;
+    max-height: calc(65vh - 35rem);
+    overflow: auto;
+  }
+}
+
 .bottom {
   display: grid;
   grid-template-columns: auto 1fr;

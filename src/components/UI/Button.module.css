@@ -19,6 +19,19 @@
   transform: scale(1);
 }
 
+.button:disabled {
+  cursor: no-drop;
+  background-color: none;
+}
+
+.button:disabled span {
+  color: var(--color-grey);
+}
+
+.button:disabled:hover {
+  transform: scale(1);
+}
+
 @media (max-width: 650px) {
   .button:hover {
     transform: scale(1);

@@ -3,6 +3,7 @@ import classes from "./Cart.module.css";
 import CartContext from "../../store/cart-context";
 import CartOrderForm from "./OrderForm";
 import CartSummary from "./CartSummary";
+import { createPortal } from "react-dom";
 
 function Cart(props) {
   const cartCtx = useContext(CartContext);
@@ -33,15 +34,20 @@ function Cart(props) {
     cartCtx.isCartVisible ? "" : classes.hidden
   }`;
 
+  const portalEl = document.getElementById("overlays");
+  const cartEl = (
+    <div className={cartStyles}>
+      <CartSummary onCloseCart={closeCartHandler} />
+      <CartOrderForm />
+    </div>
+  );
+
   //////////////////// component /////////////////////
 
   return (
     <Fragment>
-      {overlay}
-      <div className={cartStyles}>
-        <CartSummary onCloseCart={closeCartHandler} />
-        <CartOrderForm />
-      </div>
+      {createPortal(overlay, portalEl)}
+      {createPortal(cartEl, portalEl)}
     </Fragment>
   );
 }
