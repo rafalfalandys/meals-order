@@ -36,7 +36,7 @@ function CartSummary(props) {
       style={{ width: "16rem", backgroundColor: "var(--primary-color-light)" }}
     >
       {cartCtx.isFormVisible || <span>Confirm</span>}
-      {cartCtx.isFormVisible && <span>Hide Form</span>}
+      {cartCtx.isFormVisible && <span>Cancel</span>}
     </Button>
   );
 
