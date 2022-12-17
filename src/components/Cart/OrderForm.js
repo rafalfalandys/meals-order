@@ -78,6 +78,10 @@ function CartOrderForm() {
     cartCtx.hideCart();
   };
 
+  useEffect(() => {
+    if (cartCtx.items.length === 0) cartCtx.hideForm();
+  }, [cartCtx.items]);
+
   const formEl = (
     <form onSubmit={submitHandler}>
       <div className={classes.row}>

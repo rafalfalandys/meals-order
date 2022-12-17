@@ -47,7 +47,7 @@ function CartSummary(props) {
   );
 
   const price = !isCartEmpty && (
-    <div className={classes.price}>${cartCtx.totalPrice}</div>
+    <div className={classes.price}>${cartCtx.totalPrice.toFixed(2)}</div>
   );
 
   return (
