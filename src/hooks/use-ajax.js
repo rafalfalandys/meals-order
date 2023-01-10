@@ -3,7 +3,7 @@ import { useState } from "react";
 function useAjax(action, isUpload = false) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const url = `https://react-meals-e5a99-default-rtdb.europe-west1.firebasedatabase.app/${
+  const url = `https://meals-2-94ac8-default-rtdb.europe-west1.firebasedatabase.app/${
     isUpload ? "orders" : "meals"
   }.json`;
 
