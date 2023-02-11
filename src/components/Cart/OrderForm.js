@@ -114,7 +114,7 @@ function CartOrderForm() {
       <div className={classes.row}>
         <label>Phone</label>
         <input
-          className={`${isPhoneValid ? "" : classes.error}`}
+          className={`${classes.phone} ${isPhoneValid ? "" : classes.error}`}
           type="number"
           value={phone}
           onChange={onPhoneChangeHandler}

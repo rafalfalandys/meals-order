@@ -27,15 +27,17 @@ function Meals() {
     });
   }, []);
 
-  const mealsList = meals.map((meal) => (
-    <MealSingle
-      name={meal.name}
-      description={meal.description}
-      price={meal.price.toFixed(2)}
-      id={meal.id}
-      key={meal.id}
-    />
-  ));
+  const mealsList = meals.map((meal) => {
+    return (
+      <MealSingle
+        name={meal.name}
+        description={meal.description}
+        price={meal.price.toFixed(2)}
+        id={meal.id}
+        key={meal.id}
+      />
+    );
+  });
 
   return (
     <section className={classes.meals}>
