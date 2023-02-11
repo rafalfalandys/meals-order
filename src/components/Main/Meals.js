@@ -1,7 +1,7 @@
 import classes from "./Meals.module.css";
 import Card from "../UI/Card";
 import MealSingle from "./MealSingle";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Spinner from "../UI/Spinner";
 import useAjax from "../../hooks/use-ajax";
 
@@ -11,11 +11,11 @@ function Meals() {
   const [meals, setMeals] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const action = (data) => {
+  const action = useCallback((data) => {
     const mealsArr = [];
     for (const key in data) mealsArr.push(data[key]);
     setMeals(mealsArr);
-  };
+  }, []);
 
   const { fetchMeals, isLoading } = useAjax(action);
 
@@ -25,7 +25,7 @@ function Meals() {
       console.log(error.message);
       setErrorMsg(error.message);
     });
-  }, []);
+  }, [fetchMeals]);
 
   const mealsList = meals.map((meal) => {
     return (
